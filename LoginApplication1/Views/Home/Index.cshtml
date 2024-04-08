@@ -1,0 +1,23 @@
+﻿@model LoginApplication1.Models.Create
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div>
+    <label>User Name:</label>
+    @Html.EditorFor(model => model.username)
+    </div>
+    <br />
+    <div>
+     <label>Password:</label>
+     @Html.EditorFor(model => model.password)
+    </div>
+    <div class="loginbtn">
+        <input type="submit" value="Login" class="btn btn-primary" />
+    </div>
+ 
+}
