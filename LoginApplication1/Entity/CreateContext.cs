@@ -7,8 +7,9 @@ namespace LoginApplication1.Entity
 {
     public class CreateContext : DbContext
     {
-        public DbSet<Create> Logindetails { get; set; }
+        public DbSet<Signup> Register { get; set; }
 
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("data source=NANDUHARI;initial catalog=MyApplication;trusted_connection=true;TrustServerCertificate=True");

@@ -1,8 +1,12 @@
-﻿using LoginApplication1.DatabaseLayer;
+﻿using Azure;
+using LoginApplication1.DatabaseLayer;
 using LoginApplication1.Entity;
 using LoginApplication1.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -15,14 +19,48 @@ namespace LoginApplication1.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            
             return View();
         }
-
-        [HttpPost]
-        public ActionResult Index(Create model)
+        public ActionResult Signup()
         {
-            TempData["username"] = model.username;
-            TempData["password"] = model.password;
+            return View();
+        }
+        
+        
+        [HttpPost]
+        public ActionResult Signup(Signup model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                DataLayer Db = new DataLayer();
+                Db.InsertData(model);
+                TempData["SignupResult"] = "Success";
+                return RedirectToAction("SignupResult");
+            }
+            TempData["SignupResult"] = "Failure";
+            return RedirectToAction("SignupResult");
+        }
+        public ActionResult SignupResult()
+        {
+            var signupResult = TempData["SignupResult"] as string;
+
+            if (signupResult == "Success")
+            {
+                ViewBag.SignupResult = "Success";
+            }
+            else {
+                ViewBag.SignupResult = "Failure";
+            }
+            return View();
+        }
+            [HttpPost]
+        public ActionResult Index(Signup model)
+        { 
+    
+            TempData["userid"] = model.Email;
+            TempData["password"] = model.Password;
             return RedirectToAction("Details");
         }
 
@@ -30,23 +68,37 @@ namespace LoginApplication1.Controllers
         public ActionResult Details()
         {
             DataLayer data = new DataLayer();
-            List<Create> loginData = data.GetAllLogin();
+            List<Signup> loginData = data.GetAllLogin();
 
             bool isValidtrue = false;
 
-            var username = TempData["username"] as string;
-            var password = TempData["password"] as string;
+            var UserID = TempData["userid"] as string;
+            var Password = TempData["password"] as string;
+            
 
             for (int i = 0; i < loginData.Count(); i++)
             {
-                if (loginData[i].username == username && loginData[i].password == password)
+                if (loginData[i].Email == UserID && loginData[i].Password == Password)
                 {
                     isValidtrue = true;
+                    break;
                 }
             }
 
-            ViewBag.Status = isValidtrue == true ? "Success, User exists in DB" : "User doesn't exists in DB";
+
+            if (isValidtrue == true)
+            {
+                ViewBag.Status = "success";
+            }
+            else
+            {
+                return RedirectToAction("Signup");
+            }
+
             return View();
         }
+       
+
+
     }
 }

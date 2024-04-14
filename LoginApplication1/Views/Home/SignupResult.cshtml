@@ -1,0 +1,15 @@
+﻿@if (@ViewBag.SignupResult == "Success")
+{
+    <p>Success</p>
+    <input type="button" value="Click here to login" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+
+}
+else
+{
+    <p>Failed to SignUp</p>
+    <input type="button" value="Try again" onclick="@("window.location.href='" + @Url.Action("Signup", "Home") + "'");" />
+
+}
+
+
+

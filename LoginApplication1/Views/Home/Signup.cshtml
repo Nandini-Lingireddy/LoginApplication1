@@ -1,0 +1,67 @@
+﻿@model LoginApplication1.Models.Signup
+
+@{
+    ViewData["Title"] = "Signup";
+}
+@using (Html.BeginForm())
+{
+    <div>
+        <label>FirstName:</label>
+        @Html.EditorFor(model => model.FirstName)
+    </div>
+    <br />
+    <div>
+        <label>lastName:</label>
+        @Html.EditorFor(model => model.LastName)
+    </div>
+    <br />
+    <div>
+        <label>Email:</label>
+        @Html.EditorFor(model => model.Email)
+    </div>
+    <br />
+    <div>
+        <label>Password:</label>
+        @Html.EditorFor(model => model.Password)
+    </div>
+    <br />
+    <div>
+        <label>PhoneNumber:</label>
+        @Html.EditorFor(model => model.PhoneNumber)
+    </div>
+    <br />
+    <div>
+         <label>Address1:</label>
+         @Html.EditorFor(model => model.Address1)
+    </div>
+    <br />
+    <div>
+        <label>City:</label>
+        @Html.EditorFor(model => model.City)
+    </div>
+    <br />
+    <div>
+        <label>State:</label>
+        @Html.EditorFor(model => model.State)
+    </div>
+    <br />
+    <div>
+        <label>Zipcode:</label>
+        @Html.EditorFor(model => model.Zipcode)
+    </div>
+
+    <br />
+    <div class="loginbtn">
+        <input type="submit" value="Login" class="btn btn-primary" />
+    </div>
+    
+
+
+}
+
+
+            
+
+            
+     
+

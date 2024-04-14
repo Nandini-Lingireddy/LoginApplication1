@@ -1,20 +1,20 @@
-﻿@model LoginApplication1.Models.Create
+﻿@model LoginApplication1.Models.Signup
 
 @{
     ViewData["Title"] = "Index";
 }
 
-
+<p>@ViewBag.Status</p>
 @using (Html.BeginForm())
 {
     <div>
-    <label>User Name:</label>
-    @Html.EditorFor(model => model.username)
+    <label>UserID:</label>
+    @Html.EditorFor(model => model.Email)
     </div>
     <br />
     <div>
-     <label>Password:</label>
-     @Html.EditorFor(model => model.password)
+    <label>Password:</label>
+    @Html.EditorFor(model => model.Password)
     </div>
     <div class="loginbtn">
         <input type="submit" value="Login" class="btn btn-primary" />

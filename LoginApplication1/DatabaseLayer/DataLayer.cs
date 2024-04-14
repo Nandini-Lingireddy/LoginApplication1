@@ -5,14 +5,24 @@ namespace LoginApplication1.DatabaseLayer
 {
     public class DataLayer
     {
-        public List<Create> GetAllLogin()
+        public List<Signup> GetAllLogin()
         {
 
             CreateContext context = new CreateContext();
 
-            List<Create> data = context.Logindetails.ToList();
+            List<Signup> data = context.Register.ToList();
 
             return data;
+
+        }
+
+        public void InsertData(Signup model)
+        {
+            CreateContext context = new CreateContext();
+
+            context.Register.Add(model);
+            context.SaveChanges();
+
 
         }
     }
